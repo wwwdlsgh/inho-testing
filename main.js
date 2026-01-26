@@ -51,3 +51,24 @@ document.getElementById('generate-button').addEventListener('click', () => {
         lottoNumbersContainer.appendChild(lottoBall);
     }
 });
+
+// Theme toggle functionality
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+
+themeToggle.addEventListener('click', () => {
+    const isDarkMode = body.dataset.theme === 'dark';
+    if (isDarkMode) {
+        body.dataset.theme = 'light';
+        localStorage.setItem('theme', 'light');
+    } else {
+        body.dataset.theme = 'dark';
+        localStorage.setItem('theme', 'dark');
+    }
+});
+
+// Apply saved theme on load
+(function () {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    body.dataset.theme = savedTheme;
+})();
