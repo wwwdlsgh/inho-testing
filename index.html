@@ -33,7 +33,9 @@
         // --- CRITICAL STEP FOR DISQUS TO WORK ---
         // You MUST replace 'YOUR_ACTUAL_DISQUS_SHORTNAME_HERE' below with YOUR site's actual Disqus shortname.
         // This is found in your Disqus admin dashboard. Without this, comments will NOT load correctly.
-        s.src = 'https://YOUR_ACTUAL_DISQUS_SHORTNAME_HERE.disqus.com/embed.js';
+        s.src = 'https://test-build.disqus.com/embed.js'; // NOTE: 'test-build' is a generic test domain. This will NOT load your site's actual comments.
+        // You MUST replace 'test-build' with YOUR site's actual Disqus shortname.
+        // This is found in your Disqus admin dashboard. Without this, comments will NOT load correctly.
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
         })();
