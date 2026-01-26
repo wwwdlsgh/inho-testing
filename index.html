@@ -3,127 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animal Face Test (Dog/Cat Classifier)</title>
+    <title>Lotto Number Generator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Animal Face Test</h1>
-        <p>Are you a dog or a cat? Upload an image to find out!</p>
-        
-        <input type="file" id="image-upload" accept="image/*">
-        <img id="uploaded-image" style="max-width: 200px; max-height: 200px; display: none; margin: 15px auto;">
-        <canvas id="prediction-canvas" width="200" height="200" style="display: none;"></canvas> <!-- Hidden canvas for prediction -->
-        <button type="button" id="predict-button" disabled>Predict Image</button>
-
-        <div id="label-container"></div>
+        <h1>Lotto Number Generator</h1>
+        <button id="theme-toggle">Toggle Theme</button>
+        <div id="lotto-machine">
+            <div id="lotto-numbers"></div>
+        </div>
+        <button id="generate-button">Generate Numbers</button>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-    <script type="text/javascript">
-        // More API functions here:
-        // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
-
-        // the link to your model provided by Teachable Machine export panel
-        const URL = "https://teachablemachine.withgoogle.com/models/fbS159xIS/";
-
-        let model, labelContainer, maxPredictions, uploadedImageElement, predictButton, predictionCanvas, ctx;
-
-        // Load the image model
-        async function loadModel() {
-            console.log("Loading model...");
-            const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
-
-            try {
-                model = await tmImage.load(modelURL, metadataURL);
-                maxPredictions = model.getTotalClasses();
-                console.log("Model loaded successfully. Max predictions:", maxPredictions);
-            } catch (error) {
-                console.error("Error loading model:", error);
-                alert("Failed to load the model. Please check the console for details.");
-                return;
-            }
-
-            labelContainer = document.getElementById("label-container");
-            labelContainer.innerHTML = ''; // Clear previous labels
-            for (let i = 0; i < maxPredictions; i++) { // and class labels
-                labelContainer.appendChild(document.createElement("div"));
-            }
-
-            uploadedImageElement = document.getElementById("uploaded-image");
-            predictButton = document.getElementById("predict-button");
-            predictionCanvas = document.getElementById("prediction-canvas");
-            ctx = predictionCanvas.getContext('2d');
-
-            document.getElementById("image-upload").addEventListener('change', handleImageUpload);
-            predictButton.addEventListener('click', predict);
-        }
-
-        async function handleImageUpload(event) {
-            console.log("Image upload initiated.");
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedImageElement.src = e.target.result;
-                    uploadedImageElement.onload = function() {
-                        console.log("Image loaded into <img> tag.");
-                        uploadedImageElement.style.display = 'block';
-                        // Draw image to canvas for prediction
-                        ctx.drawImage(uploadedImageElement, 0, 0, predictionCanvas.width, predictionCanvas.height);
-                        console.log("Image drawn to canvas.");
-                        predictButton.disabled = false; // Enable predict button once image is loaded AND rendered
-                        labelContainer.innerHTML = ''; // Clear previous labels
-                    };
-                    uploadedImageElement.onerror = function() {
-                        console.error("Error loading image from src.");
-                        alert("Error loading image. Please try another file.");
-                        predictButton.disabled = true;
-                        uploadedImageElement.style.display = 'none';
-                    };
-                };
-                reader.readAsDataURL(file);
-            } else {
-                uploadedImageElement.style.display = 'none';
-                predictButton.disabled = true;
-                labelContainer.innerHTML = '';
-            }
-        }
-
-        // run the image through the image model
-        async function predict() {
-            console.log("Predict button clicked.");
-            if (!uploadedImageElement.src || uploadedImageElement.style.display === 'none') {
-                alert("Please upload an image first!");
-                return;
-            }
-            if (!model) {
-                alert("Model is not loaded yet. Please wait or refresh.");
-                console.error("Prediction attempted before model was loaded.");
-                return;
-            }
-            try {
-                // Predict using the canvas element
-                console.log("Attempting prediction with canvas input...");
-                const prediction = await model.predict(predictionCanvas);
-                console.log("Prediction results:", prediction);
-                labelContainer.innerHTML = ''; // Clear previous labels before displaying new ones
-                for (let i = 0; i < maxPredictions; i++) {
-                    const classPrediction =
-                        prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-                    labelContainer.childNodes[i].innerHTML = classPrediction;
-                }
-            } catch (error) {
-                console.error("Error during prediction:", error);
-                alert("An error occurred during prediction. Check console for details.");
-            }
-        }
-
-        // Initialize model on page load
-        loadModel();
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>
-
