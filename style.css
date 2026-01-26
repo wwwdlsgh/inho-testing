@@ -95,6 +95,26 @@ lotto-ball {
     margin: 10px 5px;
 }
 
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    color: var(--text-color);
+    font-size: 0.9em;
+    background-color: var(--container-background-color);
+    box-shadow: 0 -2px 5px var(--container-shadow-color);
+}
+
+footer a {
+    color: var(--button-background-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
 #generate-button:hover, #theme-toggle:hover {
     background-color: var(--button-hover-background-color);
 }
