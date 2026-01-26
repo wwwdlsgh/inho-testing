@@ -55,9 +55,11 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     uploadedImageElement.src = e.target.result;
-                    uploadedImageElement.style.display = 'block';
-                    predictButton.disabled = false; // Enable predict button once image is loaded
-                    labelContainer.innerHTML = ''; // Clear previous labels
+                    uploadedImageElement.onload = function() {
+                        uploadedImageElement.style.display = 'block';
+                        predictButton.disabled = false; // Enable predict button once image is loaded AND rendered
+                        labelContainer.innerHTML = ''; // Clear previous labels
+                    };
                 };
                 reader.readAsDataURL(file);
             }
