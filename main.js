@@ -40,9 +40,11 @@ customElements.define('lotto-ball', LottoBall);
 document.getElementById('generate-button').addEventListener('click', () => {
     const lottoNumbersContainer = document.getElementById('lotto-numbers');
     const bonusNumberDisplay = document.getElementById('bonus-number-display');
+    const bonusNumberSection = document.querySelector('.bonus-number-section'); // Get reference to the section
 
     lottoNumbersContainer.innerHTML = '';
     bonusNumberDisplay.innerHTML = ''; // Clear bonus number display
+    bonusNumberSection.style.display = 'flex'; // Show the bonus section
 
     const numbers = new Set();
     while (numbers.size < 6) {

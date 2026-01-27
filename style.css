@@ -54,10 +54,12 @@ h1 {
 
 #lotto-machine {
     display: flex;
+    flex-direction: column; /* Stack main numbers and bonus vertically */
     justify-content: center;
     align-items: center;
-    width: 300px;
-    height: 100px;
+    max-width: fit-content; /* Adjust width to content */
+    width: 100%; /* Take full width on smaller screens, then max-width will limit */
+    padding: 15px; /* Add padding inside the box */
     margin: 20px auto;
     border: 2px solid var(--container-border-color);
     border-radius: 10px;
@@ -68,7 +70,10 @@ h1 {
 
 #lotto-numbers {
     display: flex;
+    flex-wrap: wrap; /* Allow numbers to wrap */
+    justify-content: center;
     gap: 10px;
+    margin-bottom: 10px; /* Space between main numbers and bonus */
 }
 
 .bonus-number-section {
@@ -79,6 +84,7 @@ h1 {
     gap: 10px;
     font-size: 1.1em;
     font-weight: bold;
+    display: none; /* Hidden by default */
 }
 
 .bonus-number-section span {
@@ -147,3 +153,44 @@ footer a:hover {
     right: 20px;
     z-index: 1000; /* Ensure it's above other content */
 }
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+        max-width: 95%;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    #lotto-machine {
+        max-width: 95%; /* Adjust max-width for smaller screens */
+        padding: 10px;
+    }
+
+    #lotto-numbers {
+        gap: 8px; /* Slightly reduce gap for smaller screens */
+    }
+
+    lotto-ball {
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+    }
+
+    .bonus-number-section {
+        margin-top: 10px;
+        font-size: 1em;
+        gap: 8px;
+    }
+
+    #theme-toggle {
+        top: 10px;
+        right: 10px;
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
+
