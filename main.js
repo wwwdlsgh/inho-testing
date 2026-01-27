@@ -71,19 +71,27 @@ document.getElementById('generate-button').addEventListener('click', () => {
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
+function setTheme(theme) {
+    body.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+    if (theme === 'dark') {
+        themeToggle.textContent = '화이트모드'; // White Mode
+    } else {
+        themeToggle.textContent = '다크모드'; // Dark Mode
+    }
+}
+
 themeToggle.addEventListener('click', () => {
     const isDarkMode = body.dataset.theme === 'dark';
     if (isDarkMode) {
-        body.dataset.theme = 'light';
-        localStorage.setItem('theme', 'light');
+        setTheme('light');
     } else {
-        body.dataset.theme = 'dark';
-        localStorage.setItem('theme', 'dark');
+        setTheme('dark');
     }
 });
 
 // Apply saved theme on load
 (function () {
     const savedTheme = localStorage.getItem('theme') || 'light';
-    body.dataset.theme = savedTheme;
+    setTheme(savedTheme);
 })();

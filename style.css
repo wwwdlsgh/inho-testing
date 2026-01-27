@@ -140,3 +140,10 @@ footer a:hover {
 #generate-button:hover, #theme-toggle:hover {
     background-color: var(--button-hover-background-color);
 }
+
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000; /* Ensure it's above other content */
+}
