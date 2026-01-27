@@ -39,34 +39,17 @@ customElements.define('lotto-ball', LottoBall);
 
 document.getElementById('generate-button').addEventListener('click', () => {
     const lottoNumbersContainer = document.getElementById('lotto-numbers');
-    const bonusNumberDisplay = document.getElementById('bonus-number-display');
-    const bonusNumberSection = document.querySelector('.bonus-number-section'); // Get reference to the section
-
     lottoNumbersContainer.innerHTML = '';
-    bonusNumberDisplay.innerHTML = ''; // Clear bonus number display
-    bonusNumberSection.style.display = 'flex'; // Show the bonus section
-
     const numbers = new Set();
     while (numbers.size < 6) {
         numbers.add(Math.floor(Math.random() * 45) + 1);
     }
 
-    const mainNumbers = [...numbers].sort((a, b) => a - b);
-    let bonusNumber;
-    do {
-        bonusNumber = Math.floor(Math.random() * 45) + 1;
-    } while (mainNumbers.includes(bonusNumber));
-
-
-    for (const number of mainNumbers) {
+    for (const number of [...numbers].sort((a, b) => a - b)) {
         const lottoBall = document.createElement('lotto-ball');
         lottoBall.setAttribute('number', number);
         lottoNumbersContainer.appendChild(lottoBall);
     }
-
-    const bonusLottoBall = document.createElement('lotto-ball');
-    bonusLottoBall.setAttribute('number', bonusNumber);
-    bonusNumberDisplay.appendChild(bonusLottoBall);
 });
 
 // Theme toggle functionality
