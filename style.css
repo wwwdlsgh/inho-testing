@@ -129,3 +129,17 @@ footer a:hover {
 }
 
 
+
+@media (max-width: 600px) {
+    #theme-toggle {
+        top: 60px; /* Adjust top position to prevent overlap with h1 */
+        right: 15px;
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    h1 {
+        margin-top: 80px; /* Push h1 down to make space for the button */
+    }
+}
+
