@@ -26,11 +26,11 @@ class LottoBall extends HTMLElement {
     }
 
     getColor(number) {
-        if (number <= 10) return '#f44336'; // Red
-        if (number <= 20) return '#ff9800'; // Orange
-        if (number <= 30) return '#ffeb3b'; // Yellow
-        if (number <= 40) return '#4caf50'; // Green
-        return '#2196f3'; // Blue
+        if (number <= 10) return '#FBC400'; // Yellow
+        if (number <= 20) return '#69C9EA'; // Blue
+        if (number <= 30) return '#ff6b6b'; // Red
+        if (number <= 40) return '#AAAAAA'; // Gray
+        return '#66CC33'; // Green
     }
 }
 
@@ -39,17 +39,32 @@ customElements.define('lotto-ball', LottoBall);
 
 document.getElementById('generate-button').addEventListener('click', () => {
     const lottoNumbersContainer = document.getElementById('lotto-numbers');
+    const bonusNumberDisplay = document.getElementById('bonus-number-display');
+
     lottoNumbersContainer.innerHTML = '';
+    bonusNumberDisplay.innerHTML = ''; // Clear bonus number display
+
     const numbers = new Set();
     while (numbers.size < 6) {
         numbers.add(Math.floor(Math.random() * 45) + 1);
     }
 
-    for (const number of [...numbers].sort((a, b) => a - b)) {
+    const mainNumbers = [...numbers].sort((a, b) => a - b);
+    let bonusNumber;
+    do {
+        bonusNumber = Math.floor(Math.random() * 45) + 1;
+    } while (mainNumbers.includes(bonusNumber));
+
+
+    for (const number of mainNumbers) {
         const lottoBall = document.createElement('lotto-ball');
         lottoBall.setAttribute('number', number);
         lottoNumbersContainer.appendChild(lottoBall);
     }
+
+    const bonusLottoBall = document.createElement('lotto-ball');
+    bonusLottoBall.setAttribute('number', bonusNumber);
+    bonusNumberDisplay.appendChild(bonusLottoBall);
 });
 
 // Theme toggle functionality

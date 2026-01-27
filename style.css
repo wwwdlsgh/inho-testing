@@ -71,6 +71,28 @@ h1 {
     gap: 10px;
 }
 
+.bonus-number-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.bonus-number-section span {
+    color: var(--text-color);
+}
+
+#bonus-number-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px; /* Ensure space even when empty */
+    min-height: 40px;
+}
+
 lotto-ball {
     width: 40px;
     height: 40px;
